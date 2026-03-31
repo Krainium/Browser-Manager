@@ -124,7 +124,3 @@ browser/
 | Open 2 Chrome windows | Run the binary, type `chrome`, `2` |
 | Open 5 Edge windows | Run the binary, type `edge`, `5` |
 | Close everything | Type `q` or press Ctrl+C |
-
-## Author
-
-**krainium** — [github.com/krainium](https://github.com/krainium)
