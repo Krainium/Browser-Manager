@@ -109,12 +109,10 @@ So if you already have `chromedriver` in your PATH, it uses that. If you don't, 
 ## File Structure
 
 ```
-browser/
   browser.py              - main script (run with Python)
   browser-manager.exe     - Windows binary (no Python needed)
   browser-manager         - Linux binary
   browser-manager-macos   - macOS binary
-  README.md               - this file
 ```
 
 ## Quick Reference
