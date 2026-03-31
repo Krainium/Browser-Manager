@@ -18,25 +18,6 @@ This tool gives you something better. Each instance is a full standalone browser
 
 Works great for managing multiple social media accounts, testing different user roles on the same app, running bots that each need their own session, or any situation where you need several independent logins open at once without them stepping on each other.
 
-## Quick Start — Standalone Binary
-
-Pre-built binaries need no Python install. Just download the right one for your OS, open a terminal, run it.
-
-**Linux**
-```
-chmod +x browser-manager
-./browser-manager
-```
-
-**Windows**
-```
-browser-manager.exe
-```
-
-**macOS**
-```
-chmod +x browser-manager-macos
-./browser-manager-macos
 ```
 
 You still need Chrome, Firefox, or Edge installed on the machine. The binary bundles Python, Selenium, the driver manager — everything except the actual browser.
