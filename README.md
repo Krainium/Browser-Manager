@@ -2,7 +2,7 @@
 
 Spin up multiple isolated browser instances from one terminal. Each instance gets its own fresh profile — no shared cookies, no saved passwords leaking between windows, no leftover state from previous runs.
 
-Built for Windows, Linux, macOS. Works with Chrome, Firefox, Edge.
+Built for Windows, Linux, macOS. Works with Chrome, Firefox, Edge. Also comes with a Windows `.exe` file so you can run it without installing Python.
 
 ## What It Does
 
@@ -18,9 +18,27 @@ This tool gives you something better. Each instance is a full standalone browser
 
 Works great for managing multiple social media accounts, testing different user roles on the same app, running bots that each need their own session, or any situation where you need several independent logins open at once without them stepping on each other.
 
+## Quick Start
+
+**Windows (.exe — no Python needed)**
+```
+browser-manager.exe
+```
+Just double-click it or run from a terminal. Everything is bundled inside.
+
+**Linux**
+```
+chmod +x browser-manager
+./browser-manager
 ```
 
-You still need Chrome, Firefox, or Edge installed on the machine. The binary bundles Python, Selenium, the driver manager — everything except the actual browser.
+**macOS**
+```
+chmod +x browser-manager-macos
+./browser-manager-macos
+```
+
+You still need Chrome, Firefox, or Edge installed on the machine. The binary bundles everything else.
 
 ## Run From Source
 
@@ -28,7 +46,6 @@ If you prefer running the Python script directly:
 
 ```
 pip install selenium colorama
-cd browser
 python browser.py
 ```
 
@@ -43,36 +60,15 @@ Number of instances: 3
 
 Three Chrome windows open, each with their own profile. Close them by typing `q` or pressing Ctrl+C.
 
-## Build Your Own Binary
-
-Run the build script on whatever platform you're targeting. PyInstaller can only build for the OS it's running on.
-
-```
-pip install pyinstaller selenium colorama webdriver-manager
-python build.py
-```
-
-This produces a single-file executable in the `dist/` folder:
-
-| OS | Output file | Typical size |
-|----|-------------|--------------|
-| Windows | `dist/browser-manager.exe` | ~30 MB |
-| Linux | `dist/browser-manager` | ~27 MB |
-| macOS | `dist/browser-manager-macos` | ~30 MB |
-
-The build script installs missing dependencies automatically, runs PyInstaller, cleans up temp files when done.
-
 ## Platform Notes
 
 **Windows**
 - Looks for Chrome in Program Files, Edge in its default location, Firefox in Mozilla's folder
 - Profiles go to `%USERPROFILE%\selenium_profiles`
-- Signal handling uses `SIGBREAK` since Windows handles Ctrl+C differently
 
 **Linux**
 - Searches PATH for `google-chrome`, `chromium-browser`, `microsoft-edge`, `firefox`
 - Adds `--no-sandbox` since many Linux setups (containers, WSL) need it
-- Adds `--disable-dev-shm-usage` to avoid shared memory issues in constrained environments
 - Profiles go to `~/selenium_profiles`
 
 **macOS**
@@ -92,7 +88,7 @@ Every time you launch, the script creates a fresh directory per instance:
 
 Old profiles from previous runs get deleted on startup. When you close the script, it removes the profile directories too. Nothing sticks around.
 
-For Edge specifically, the script forces `--profile-directory=Default` inside the custom user data dir. This stops Edge from pulling in your real profile. It also disables auto-import, sidebar popups, the sync prompt. Each Edge instance behaves like a first-time install.
+For Edge specifically, the script forces a clean default profile inside the custom directory. This stops Edge from pulling in your real profile. It also disables auto-import, sidebar popups, the sync prompt. Each Edge instance behaves like a first-time install.
 
 ## Stealth Mode
 
@@ -114,12 +110,11 @@ So if you already have `chromedriver` in your PATH, it uses that. If you don't, 
 
 ```
 browser/
-  browser.py      - main script (run with Python)
-  build.py        - builds standalone binary for your OS
-  dist/
-    browser-manager       - Linux binary
-    browser-manager.exe   - Windows binary (build on Windows)
-    browser-manager-macos - macOS binary (build on macOS)
+  browser.py              - main script (run with Python)
+  browser-manager.exe     - Windows binary (no Python needed)
+  browser-manager         - Linux binary
+  browser-manager-macos   - macOS binary
+  README.md               - this file
 ```
 
 ## Quick Reference
@@ -129,8 +124,6 @@ browser/
 | Open 2 Chrome windows | Run the binary, type `chrome`, `2` |
 | Open 5 Edge windows | Run the binary, type `edge`, `5` |
 | Close everything | Type `q` or press Ctrl+C |
-| Build binary for your OS | `python build.py` |
-| Change profile location | Edit `get_profile_base_dir()` in browser.py |
 
 ## Author
 
