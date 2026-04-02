@@ -5,6 +5,7 @@ import signal
 import platform
 import subprocess
 import colorama
+import tqdm
 from colorama import Fore, Style
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
